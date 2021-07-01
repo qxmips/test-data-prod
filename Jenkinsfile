@@ -59,6 +59,45 @@ spec:
 
             }
         }
+        if (BRANCH_NAME == 'master' || BRANCH_NAME == 'main' ) {
+            stage ('deploy to test') {
+                // when {
+                //     expression {
+                //         branch == 'main'
+                //     }
+                // }
+                steps {
+                    println "deploying code from ${branch} branch to testing env"
 
+                }
+            }
+            stage ('perform testing ') {
+                // when {
+                //     expression {
+                //         branch == 'main'
+                //     }
+                // }
+                steps {
+                    println "testing code from ${branch} branch"
+
+                }
+            }
+            stage ('perform testing ') {
+                // when {
+                //     expression {
+                //         branch == 'main'
+                //     }
+                // }
+                steps {
+                    println "testing code from ${branch} branch"
+
+                }
+            }
+            stage ('deploy on prod') {
+                steps {
+                    println "DEPLOYING CODE FROM  ${branch} branch to prod env"
+                }
+            }
+        }
     }
 }

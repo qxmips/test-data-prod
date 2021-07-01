@@ -27,9 +27,6 @@ spec:
     - name: docker-sock
       mountPath: /var/run/docker.sock
   volumes:
-  - name: repository
-    persistentVolumeClaim:
-      claimName: repository
   - name: docker-sock
     hostPath:
       path: /var/run/docker.sock

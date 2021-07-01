@@ -49,6 +49,17 @@ spec:
             }
 
         }
+        stage ('deploy to dev') {
+            when {
+                expression {
+                    branch == 'dev'
+                }
+            }
+            steps {
+                println "${branch}"
+
+            }
+        }
 
     }
 }

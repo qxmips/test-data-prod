@@ -82,17 +82,7 @@ spec:
 
             }
         }
-        stage ('perform testing ') {
-            when {
-                expression {
-                    branch == 'main'
-                }
-            }
-            steps {
-                println "testing code from ${branch} branch"
 
-            }
-        }
         stage ('deploy on prod') {
             when {
                 expression {

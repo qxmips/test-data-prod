@@ -48,56 +48,61 @@ spec:
             }
 
         }
-        stage ('deploy to dev') {
+    stage ('deploy to dev') {
+        when {
+            expression {
+                branch == 'dev'
+            }
+        }
+        steps {
+            println "${branch}"
+
+        }
+    }
+
+        stage ('deploy to test') {
             when {
                 expression {
-                    branch == 'dev'
+                    branch == 'main'
                 }
             }
             steps {
-                println "${branch}"
+                println "deploying code from ${branch} branch to testing env"
 
             }
         }
-        if (BRANCH_NAME == 'master' || BRANCH_NAME == 'main' ) {
-            stage ('deploy to test') {
-                // when {
-                //     expression {
-                //         branch == 'main'
-                //     }
-                // }
-                steps {
-                    println "deploying code from ${branch} branch to testing env"
-
+        stage ('perform testing ') {
+            when {
+                expression {
+                    branch == 'main'
                 }
             }
-            stage ('perform testing ') {
-                // when {
-                //     expression {
-                //         branch == 'main'
-                //     }
-                // }
-                steps {
-                    println "testing code from ${branch} branch"
+            steps {
+                println "testing code from ${branch} branch"
 
-                }
-            }
-            stage ('perform testing ') {
-                // when {
-                //     expression {
-                //         branch == 'main'
-                //     }
-                // }
-                steps {
-                    println "testing code from ${branch} branch"
-
-                }
-            }
-            stage ('deploy on prod') {
-                steps {
-                    println "DEPLOYING CODE FROM  ${branch} branch to prod env"
-                }
             }
         }
+        stage ('perform testing ') {
+            when {
+                expression {
+                    branch == 'main'
+                }
+            }
+            steps {
+                println "testing code from ${branch} branch"
+
+            }
+        }
+        stage ('deploy on prod') {
+            when {
+                expression {
+                    branch == 'main'
+                }
+            }
+            steps {
+                println "DEPLOYING CODE FROM  ${branch} branch to prod env"
+            }
+        }
+        
     }
 }

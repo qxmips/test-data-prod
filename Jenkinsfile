@@ -21,9 +21,10 @@ spec:
   - name: liquibase
     image: liquibase/liquibase:4.3
     command:
-      - bash
-       - -c 
-      - while true; do /bin/sleep 10; done;
+      - "bash"
+      - "-c"
+      - |
+        while true; do /bin/sleep 10; done;
     volumeMounts:
       - name: liquibase-config
         mountPath: /config

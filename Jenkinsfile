@@ -21,24 +21,14 @@ spec:
   - name: liquibase
     image: liquibase/liquibase:4.3
     command:
-      - cat
+      - while true; do sleep 10; done;
     volumeMounts:
       - name: liquibase-config
         mountPath: /config
-  - name: docker
-    image: docker:18.09.2
-    command: ["cat"]
-    tty: true
-    volumeMounts:
-    - name: docker-sock
-      mountPath: /var/run/docker.sock
   volumes:
   - name: liquibase-config
     configMap:
       name: liquibase-config
-  - name: docker-sock
-    hostPath:
-      path: /var/run/docker.sock
 """
         }
 }

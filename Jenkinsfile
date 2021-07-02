@@ -21,11 +21,7 @@ spec:
   - name: liquibase
     image: liquibase/liquibase:4.3
     command:
-      - liquibase
-      - --classpath=/config/
-      - --defaultsFile=/config/liquibase.properties
-      - --changeLogFile=changelog.sql
-      - update
+      - cat
     volumeMounts:
       - name: liquibase-config
         mountPath: /config

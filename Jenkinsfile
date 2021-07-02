@@ -23,7 +23,7 @@ spec:
     command:
       - liquibase
       - --classpath=/config/
-      - --defaultsFile=liquibase.properties
+      - --defaultsFile=/config/liquibase.properties
       - --changeLogFile=changelog.sql
       - update
     volumeMounts:

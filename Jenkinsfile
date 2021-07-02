@@ -18,6 +18,20 @@ metadata:
     job: build-service
 spec:
   containers:
+  - name: liquibase
+    image: liquibase/liquibase:4.3
+    command:
+      - liquibase
+      - --defaultsFile=/config/liquibase.properties
+      - --changeLogFile=/config/changelog.sql
+      - update
+    volumeMounts:
+      - name: liquibase-config
+        mountPath: /config
+  volumes:
+    - name: liquibase-config
+      configMap:
+      name: liquibase-config
   - name: docker
     image: docker:18.09.2
     command: ["cat"]
@@ -91,6 +105,10 @@ spec:
             }
             steps {
                 println "DEPLOYING CODE FROM  ${branch} branch to prod env"
+                script {
+                    
+                    sh "ls -alh"
+                }
             }
         }
         

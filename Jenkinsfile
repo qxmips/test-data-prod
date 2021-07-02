@@ -9,7 +9,7 @@ pipeline {
 
     agent {
         kubernetes {
-            defaultContainer 'jnlp'
+//            defaultContainer 'jnlp'
             yaml """
 apiVersion: v1
 kind: Pod
@@ -21,7 +21,9 @@ spec:
   - name: liquibase
     image: liquibase/liquibase:4.3
     command:
-      - while true; do sleep 10; done;
+      - bash
+       - -c 
+      - while true; do /bin/sleep 10; done;
     volumeMounts:
       - name: liquibase-config
         mountPath: /config

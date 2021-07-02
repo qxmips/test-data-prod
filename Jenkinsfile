@@ -22,8 +22,9 @@ spec:
     image: liquibase/liquibase:4.3
     command:
       - liquibase
-      - --defaultsFile=/config/liquibase.properties
-      - --changeLogFile=/config/changelog.sql
+      - --classpath=/config/
+      - --defaultsFile=liquibase.properties
+      - --changeLogFile=changelog.sql
       - update
     volumeMounts:
       - name: liquibase-config

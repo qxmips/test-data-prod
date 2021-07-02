@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  name: pod
+  namespace: default
   labels:
     job: build-service
 spec:
@@ -8,14 +10,22 @@ spec:
   - name: liquibase
     image: liquibase/liquibase:4.3
     command:
-      - liquibase
-      - --defaultsFile=/config/liquibase.properties
-      - --changeLogFile=/config/changelog.sql
-      - update
+      - sleep
+      -  "1000"
     volumeMounts:
       - name: liquibase-config
         mountPath: /config
+  - name: docker
+    image: docker:18.09.2
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
   volumes:
-    - name: config-volume
-      configMap:
-        name: special-config
+  - name: liquibase-config
+    configMap:
+      name: liquibase-config
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    job: build-service
+spec:
+  containers:
+  - name: liquibase
+    image: liquibase/liquibase:4.3
+    command:
+      - liquibase
+      - --defaultsFile=/config/liquibase.properties
+      - --changeLogFile=/config/changelog.sql
+      - update
+    volumeMounts:
+      - name: liquibase-config
+        mountPath: /config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: special-config

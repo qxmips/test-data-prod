@@ -28,10 +28,6 @@ spec:
     volumeMounts:
       - name: liquibase-config
         mountPath: /config
-  volumes:
-    - name: liquibase-config
-      configMap:
-      name: liquibase-config
   - name: docker
     image: docker:18.09.2
     command: ["cat"]
@@ -40,6 +36,9 @@ spec:
     - name: docker-sock
       mountPath: /var/run/docker.sock
   volumes:
+  - name: liquibase-config
+    configMap:
+      name: liquibase-config
   - name: docker-sock
     hostPath:
       path: /var/run/docker.sock

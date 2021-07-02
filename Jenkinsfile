@@ -59,6 +59,10 @@ spec:
         }
         steps {
             println "${branch}"
+            script {
+                    
+                    sh "liquibase --classpath=/config/ --defaultsFile=/config/liquibase.properties --changeLogFile=changelog.sql update"
+                }
 
         }
     }
@@ -71,6 +75,10 @@ spec:
             }
             steps {
                 println "deploying code from ${branch} branch to testing env"
+                script {
+                    
+                    sh "liquibase --classpath=/config/ --defaultsFile=/config/liquibase.properties --changeLogFile=changelog.sql update"
+                }
 
             }
         }
@@ -96,7 +104,7 @@ spec:
                 println "DEPLOYING CODE FROM  ${branch} branch to prod env"
                 script {
                     
-                    sh "ls -alh"
+                    sh "liquibase --classpath=/config/ --defaultsFile=/config/liquibase.properties --changeLogFile=changelog.sql update"
                 }
             }
         }

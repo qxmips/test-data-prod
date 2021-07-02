@@ -59,10 +59,14 @@ spec:
         }
         steps {
             println "${branch}"
-            script {
+            container('liquibase'){
+                script {
                     
                     sh "liquibase --classpath=/config/ --defaultsFile=/config/liquibase.properties --changeLogFile=changelog.sql update"
                 }
+
+            }
+
 
         }
     }
